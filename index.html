@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Agency Company</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Styles -->
+  <style>
+    /* === Reset & Base === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #F5F5F2;
+      color: #1A1A1A;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: #155E63;
+      margin-bottom: 0.5em;
+    }
+    a {
+      text-decoration: none;
+      color: #155E63;
+    }
+    a:hover {
+      color: #D4AF37;
+    }
+
+    /* === Video Background === */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+
+    /* === Navbar === */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background-color: rgba(245, 245, 242, 0.95);
+      backdrop-filter: blur(5px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-container img {
+      width: 40px;
+    }
+    .logo-container span {
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .navbar ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .navbar li a {
+      font-weight: 500;
+    }
+    .toggle-btn {
+      background: #155E63;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .toggle-btn:hover {
+      background: #0c3d3f;
+    }
+
+    /* === Sections === */
+    .section {
+      padding: 5rem 2rem 3rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .section p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    /* === Product Gallery === */
+    .product-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .product-card {
+      width: 280px;
+      background: #fff;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card h3 {
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* === Slideshow === */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .slideshow-container .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slideshow-container .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* === CEO Section === */
+    .ceo-profile {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .ceo-profile img {
+      width: 200px;
+      border-radius: 50%;
+      border: 4px solid #D4AF37;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+
+    /* === Partner Logos === */
+    .product-gallery img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* === Footer === */
+    footer {
+      background-color: #155E63;
+      color: #F5F5F2;
+      padding: 2rem;
+      text-align: center;
+    }
+    .contact-info i {
+      margin-right: 0.5rem;
+      color: #D4AF37;
+    }
+    .contact-info a {
+      color: #F5F5F2;
+    }
+    .social-icons {
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      margin: 0 0.5rem;
+      color: #D4AF37;
+      font-size: 1.2rem;
+    }
+    .footer-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* === Dark Mode === */
+    body.dark-mode {
+      background-color: #1A1A1A;
+      color: #F5F5F2;
+    }
+    body.dark-mode .navbar {
+      background-color: rgba(26,26,26, 0.9);
+    }
+    body.dark-mode .section {
+      background-color: #2a2a2a;
+    }
+    body.dark-mode .toggle-btn {
+      background: #D4AF37;
+      color: #1A1A1A;
+    }
+    body.dark-mode footer {
+      background-color: #0e0e0e;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- === Video Background === -->
+  <div class="video-background" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" src="https://cdn.pixabay.com/vimeo/948084084/pexels-artem-podrez-5752724%20(1080p).mp4"></video>
+  </div>
+
+  <!-- === Navbar === -->
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="log star.jpg" alt="Diamond Logo" />
+      <span>My Agency Company</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#sourcing">Sourcing</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#mining">Mining</a></li>
+        <li><a href="#partners">Partners</a></li>
+      </ul>
+    </nav>
+    <button class="toggle-btn" id="darkModeToggle" aria-pressed="false">Dark Mode</button>
+  </header>
+
+  <!-- === Main Content === -->
+  <main>
+
+    <!-- Products Section -->
+    <section id="products" class="section">
+      <h2>Our Collection</h2>
+      <p>Explore our premium selection of ethically sourced minerals, raw gemstones, and fine jewelry crafted for global markets.</p>
+      <div class="product-gallery">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="slideshow-container" data-delay="3000">
+            <img src="natural emerald2.jpg" class="slide active" alt="Gold Bar" />
+            <img src="natural emerald3.webp" class="slide" alt="Image 2" />
+            <img src="natural emerald.jpg" class="slide" alt="Image 3" />
+            <img src="natural emerald1.jpg" class="slide" alt="Image 4" />
+            <img src="natural emerald.jpg" class="slide" alt="Image 5" />
+          </div>
+          <h3>Natural Emerald</h3>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="slideshow-container" data-delay="3000">
+            <img src="gold-dust1.jpg" class="slide active" alt="Gold Dust" />
+            <img src="GOLD BAR2.png" class="slide" alt="Image 2" />
+            <img src="gold nugget2.jpg" class="slide" alt="Image 3" />
+            <img src="gold nugget3.jpeg" class="slide" alt="Image 4" />
+            <img src="gold nugget4.jpg" class="slide" alt="Image 5" />
+          </div>
+          <h3>24K Gold Nuggets</h3>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="slideshow-container" data-delay="3000">
+            <img src="POLISHED4.webp" class="slide active" alt="Polished Diamond" />
+            <img src="38.jpeg" class="slide" alt="Image 2" />
+            <img src="minerals .jpg" class="slide" alt="Image 3" />
+            <img src="Diamond-4.jpg" class="slide" alt="Image 4" />
+            <img src="Diamond3.webp" class="slide" alt="Image 5" />
+          </div>
+          <h3>Diamond Jewelry</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2>About Us</h2>
+      <p>We are a trusted international supplier of precious stones and minerals based in East Africa and Europe. With a commitment to ethical sourcing and premium quality, we serve jewelers, collectors, and industrial clients worldwide.</p>
+    </section>
+
+    <!-- Sourcing Section -->
+    <section id="sourcing" class="section">
+      <h2>Ethical Sourcing</h2>
+      <p>Our minerals and gems are sourced responsibly from certified mines in Uganda, DRC, and Kenya, adhering to international trade standards and traceability protocols.</p>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+      <h2>Meet Our CEO</h2>
+      <div class="ceo-profile">
+        <img src="ceo.png" alt="CEO Portrait" />
+        <div>
+          <h3>NSUBUGA MOSES MALCOM</h3>
+          <p>Founder & CEO, with good years in the mineral trade industry. Passionate about transparency and elevating African minerals on the global stage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mining Section -->
+    <section id="mining" class="section">
+      <h2>Mining Activities</h2>
+      <p>Discover how we ethically extract minerals and gems from rich African landscapes, working hand in hand with locals as part of our expert teams.</p>
+      <div style="text-align:center;">
+        <video width="80%" controls poster="mining-thumbnail.jpg">
+          <source src="goldmining.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="section">
+      <h2>Our Stores & Trusted Partners</h2>
+      <p>We’re proud to collaborate with leading jewelers, boutiques, and industrial clients who appreciate the value and integrity of our products.</p>
+      <div class="product-gallery">
+        <div class="product-card">
+          <img src="images of gold1.webp" alt="Partner Store 1" />
+          <h3>Paris Experts</h3>
+        </div>
+        <div class="product-card">
+          <img src="gyu3.png" alt="Partner Store 2" />
+          <h3>Nairobi Gold Market</h3>
+        </div>
+        <div class="product-card">
+          <img src="olgh.jpg" alt="Partner Store 3" />
+          <h3>Kampala Gems Hub</h3>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === Footer === -->
+  <footer id="contact">
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <div><i class="fas fa-envelope"></i> <a href="mailto:contact@youragency.com">myagencycompanybiz@gmail.com</a></div>
+      <div><i class="fas fa-phone"></i> +33 753 832 799 (France)</div>
+      <div><i class="fas fa-phone"></i> +254 768 979 404 (Kenya)</div>
+      <div><i class="fab fa-whatsapp"></i> 
+        <a href="https://wa.me/33753832799" target="_blank">WhatsApp France</a> | 
+        <a href="https://wa.me/256775997580" target="_blank">WhatsApp Uganda</a>
+      </div>
+      <div><i class="fas fa-map-marker-alt"></i> Offices: Paris, Kampala, Nairobi</div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-note">&copy; 2025 My Agency Company. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- === Scripts === -->
+  <script>
+    // Toggle Dark Mode
+    document.getElementById('darkModeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+      this.setAttribute('aria-pressed', document.body.classList.contains('dark-mode'));
+    });
+
+    // Slideshow
+    document.querySelectorAll('.slideshow-container').forEach(container => {
+      const slides = container.querySelectorAll('.slide');
+      let index = 0;
+      const delay = container.dataset.delay || 3000;
+
+      setInterval(() => {
+        slides[index].classList.remove('active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('active');
+      }, delay);
+    });
+  </script>
+</body>
+</html>
